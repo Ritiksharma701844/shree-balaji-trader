@@ -1026,9 +1026,8 @@
         <h3>Send Us a Message</h3>
         <p>We'll get back to you within 24 hours.</p>
 
-        <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="submitForm(event)">
+        <form name="contact" method="POST" action="/success.html" data-netlify="true">
           <input type="hidden" name="form-name" value="contact">
-          <input type="hidden" name="bot-field" style="display:none">
 
           <div class="fg-row">
             <div class="fg">
@@ -1048,7 +1047,7 @@
             <label for="f-msg">Your Message</label>
             <textarea id="f-msg" name="message" placeholder="Tell us about your requirement…" required></textarea>
           </div>
-          <button type="submit" class="form-btn" id="submitBtn">Send Message →</button>
+          <button type="submit" class="form-btn">Send Message →</button>
         </form>
       </div>
 
@@ -1093,36 +1092,6 @@
   }, { threshold: 0.1 });
   els.forEach(el => io.observe(el));
 
-  // Form submit
-  function submitForm(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    const form = e.target;
-    const data = new FormData(form);
-
-    fetch('/', { method: 'POST', body: data })
-      .then(() => {
-        btn.textContent = '✓ Message Sent!';
-        btn.style.background = '#3a7d52';
-        btn.disabled = true;
-        form.reset();
-        setTimeout(() => {
-          btn.textContent = 'Send Message →';
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 4000);
-      })
-      .catch(() => {
-        btn.textContent = '✓ Submitted!';
-        btn.style.background = '#3a7d52';
-        btn.disabled = true;
-        setTimeout(() => {
-          btn.textContent = 'Send Message →';
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 4000);
-      });
-  }
 </script>
 
 </body>
